@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="@dimen/view_margin_start"
+    android:layout_marginTop="@dimen/view_margin_start">
+
+    <TextView
+        android:id="@+id/weatherActivityWeatherInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/view_margin_top"
+        android:text="Clear Sky"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/weatherActivityTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8dp"
+        android:text="27 C"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/weatherActivityWeatherInfo" />
+
+
+    <!--    TEMP VALUES-->
+    <TextView
+        android:id="@+id/weatherActivityMinTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_24dp"
+        android:text="@string/min"
+        app:layout_constraintEnd_toStartOf="@id/weatherActivityRealFeel"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/weatherActivityTemp" />
+
+    <TextView
+        android:id="@+id/weatherActivityRealFeel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/realfeel"
+        app:layout_constraintEnd_toStartOf="@id/weatherActivityMaxTemp"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@id/weatherActivityMinTemp"
+        app:layout_constraintTop_toTopOf="@id/weatherActivityMinTemp" />
+
+    <TextView
+        android:id="@+id/weatherActivityMaxTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/max"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toEndOf="@+id/weatherActivityRealFeel"
+        app:layout_constraintTop_toTopOf="@id/weatherActivityMinTemp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

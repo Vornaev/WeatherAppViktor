@@ -17,9 +17,6 @@ import org.mockito.MockitoAnnotations
 @OptIn(ExperimentalCoroutinesApi::class)
 abstract class BaseViewModelTest {
 
-//
-//    @get:Rule
-//    val rule = InstantTaskExecutorRule()
 
     @ExperimentalCoroutinesApi
     private val testDispatcher = TestCoroutineDispatcher()

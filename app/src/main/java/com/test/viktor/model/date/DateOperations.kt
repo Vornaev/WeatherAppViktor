@@ -1,12 +1,7 @@
 package com.test.viktor.model.date
 
-import android.annotation.SuppressLint
 import com.test.viktor.model.response.daily.Daily
-import com.test.viktor.model.response.daily.Weather
-import java.text.DateFormat
 import java.text.SimpleDateFormat
-import java.time.Instant
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 object DateOperations {
@@ -22,8 +17,7 @@ object DateOperations {
     }
 
     fun getTodayDate(list: List<Daily>): Daily? {
-        val p = list.filter { predicate(it) }
-        return p.first()
+        return list.firstOrNull { predicate(it) }
     }
 
     fun getTimeForEpoch(epochTime : Long): String {

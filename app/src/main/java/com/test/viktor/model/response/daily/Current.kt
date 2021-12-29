@@ -23,7 +23,7 @@ data class Current(
       @SerializedName("temp")
       var temp: Double,
       @SerializedName("uvi")
-      var uvi: Int,
+      var uvi: Double,
       @SerializedName("visibility")
       var visibility: Int,
       @SerializedName("weather")

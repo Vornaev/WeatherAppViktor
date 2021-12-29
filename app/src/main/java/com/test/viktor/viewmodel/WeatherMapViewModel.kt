@@ -24,22 +24,12 @@ class WeatherMapViewModel @Inject constructor(
 
     var unitFormat = UnitFormat.METRIC
 
-    val weatherDataFlow: MutableStateFlow<ApiResult<WeatherRealTimeResponse>> =
-        MutableStateFlow(ApiResult.Loading)
-
     val airPollutionDataFlow: MutableStateFlow<ApiResult<AirPollutionResponse>> =
         MutableStateFlow(ApiResult.Loading)
 
     val dailyForecastStateFlow : MutableStateFlow<ApiResult<WeatherForecastDailyResponse>> = MutableStateFlow(ApiResult.Loading)
 
 
-    fun getRealTimeWeatherData() {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.getRealtimeWeatherData(name = "Skopje", format = unitFormat.unit).collect {
-                weatherDataFlow.value = it
-            }
-        }
-    }
 
     fun getAirPollution() {
         viewModelScope.launch(Dispatchers.IO) {

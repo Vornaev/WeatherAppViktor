@@ -6,7 +6,10 @@ import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.dialog.MaterialDialogs
 import com.test.viktor.R
 import com.test.viktor.databinding.ActivityMainBinding
 import com.test.viktor.datasource.network.helpers.ApiResult
@@ -15,6 +18,7 @@ import com.test.viktor.model.enums.UnitFormat
 import com.test.viktor.model.response.daily.WeatherForecastDailyResponse
 import com.test.viktor.model.response.realtime.WeatherRealTimeResponse
 import com.test.viktor.model.response.pollution.AirPollutionResponse
+import com.test.viktor.util.DialogUtills
 import com.test.viktor.viewmodel.WeatherMapViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import jp.wasabeef.glide.transformations.BlurTransformation
@@ -41,9 +45,8 @@ class MainActivity : BaseActivity() {
 
         init()
         loadData()
-        subscribeWeatherData()
-        subscribeAirPollutionData()
         subscribeForecastDailyData()
+        subscribeAirPollutionData()
 
     }
 
@@ -56,42 +59,8 @@ class MainActivity : BaseActivity() {
     }
 
     private fun loadData() {
-        // viewModel.getRealTimeWeatherData()
         viewModel.getAirPollution()
         viewModel.getDailyForecast()
-    }
-
-
-    private fun subscribeWeatherData() {
-        lifecycleScope.launchWhenStarted {
-            viewModel.weatherDataFlow.collectLatest {
-                when (it) {
-                    is ApiResult.Error -> {
-                        stopRefreshing()
-                        handleError(it.networkError)
-                    }
-                    is ApiResult.Loading -> {
-                        if (isRefreshing())
-                            binding.contentMain.rootMain.animateResizeAndHide()
-                    }
-                    is ApiResult.Success -> {
-
-                        it.data?.let { res ->
-                            presentInView(res)
-                        }
-                        if (isRefreshing()) {
-                            delay(300)
-                            stopRefreshing()
-                            binding.contentMain.rootMain.animateResizeAndShow()
-                        } else {
-                            binding.contentMain.rootMain.animateFadeInSlow()
-                        }
-
-                        //
-                    }
-                }
-            }
-        }
     }
 
 
@@ -102,6 +71,7 @@ class MainActivity : BaseActivity() {
                     is ApiResult.Error -> {
                         stopRefreshing()
                         handleError(it.networkError)
+                        animateRootViewShowAndScale()
                     }
                     is ApiResult.Loading -> {
                         if (isRefreshing())
@@ -115,20 +85,15 @@ class MainActivity : BaseActivity() {
                         if (isRefreshing()) {
                             delay(300)
                             stopRefreshing()
-                            binding.contentMain.rootMain.animateResizeAndShow()
+                            animateRootViewShowAndScale()
                         } else {
                             binding.contentMain.rootMain.animateFadeInSlow()
                         }
-
                         //
                     }
                 }
             }
         }
-    }
-
-    private fun isRefreshing(): Boolean {
-        return binding.swipeRefresh.isRefreshing
     }
 
     private fun subscribeAirPollutionData() {
@@ -152,20 +117,16 @@ class MainActivity : BaseActivity() {
         }
     }
 
-
-    private fun presentInView(data: AirPollutionResponse) {
-        val index = data.list.first().main.aqi
+    private fun animateRootViewShowAndScale() {
+        binding.contentMain.rootMain.animateResizeAndShow()
     }
 
-    private fun presentInView(data: WeatherRealTimeResponse) {
-        data.weather.firstOrNull()?.let {
-            binding.contentMain.weatherActivityWeatherInfo.text = it.main
-            loadImage(R.drawable.clear_sky)
+    private fun isRefreshing(): Boolean {
+        return binding.swipeRefresh.isRefreshing
+    }
 
-        }
-        val temp = "${data.main.temp.roundToInt()} ${getUnitFormat()}"
-        binding.contentMain.weatherActivityTemp.text = temp
-        binding.contentMain.weatherActivityRealFeelValue.text = data.main.feelsLike.toText()
+    private fun presentInView(data: AirPollutionResponse) {
+        //
     }
 
     private fun presentInView(data: WeatherForecastDailyResponse) {
@@ -183,7 +144,8 @@ class MainActivity : BaseActivity() {
         val todayData = DateOperations.getTodayDate(data.daily)
 
         todayData?.let {
-            binding.contentMain.weatherSunriseValue.text = DateOperations.getTimeForEpoch(it.sunrise)
+            binding.contentMain.weatherSunriseValue.text =
+                DateOperations.getTimeForEpoch(it.sunrise)
             binding.contentMain.weatherSunsetValue.text = DateOperations.getTimeForEpoch(it.sunset)
             binding.contentMain.weatherActivityMaxTempValue.text = it.temp.max.toText()
             binding.contentMain.weatherActivityMinTempValue.text = it.temp.min.toText()
@@ -202,7 +164,7 @@ class MainActivity : BaseActivity() {
         Glide.with(this)
             .load(drawable)
             .apply(RequestOptions.bitmapTransform(BlurTransformation(5, 1)))
-            //.transition(DrawableTransitionOptions.withCrossFade())
+            .transition(DrawableTransitionOptions.withCrossFade(200))
             .into(binding.weatherBackgroundImg)
     }
 
@@ -217,8 +179,25 @@ class MainActivity : BaseActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.action_unit_format -> {
+                showChooseDialog()
+                return true
+            }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun showChooseDialog() {
+        DialogUtills.createSingleChoiceDialog(
+            this,
+            arrayListOf("Celsius", "Fahrenheit"),
+            viewModel.unitFormat,
+            ::onNewUnitFormatSelected
+        )
+    }
+
+    private fun onNewUnitFormatSelected(unitFormat: UnitFormat) {
+        viewModel.unitFormat = unitFormat
+        viewModel.getDailyForecast()
     }
 }

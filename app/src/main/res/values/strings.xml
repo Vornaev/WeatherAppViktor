@@ -20,4 +20,5 @@
     <string name="sunrise">Sunrise</string>
     <string name="sunset">Sunset</string>
     <string name="background">Background</string>
+    <string name="units">Units format</string>
 </resources>

@@ -14,6 +14,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
+import java.time.Duration
+import java.util.concurrent.TimeUnit
 
 class OpenWeatherHttpService {
 
@@ -26,6 +28,7 @@ class OpenWeatherHttpService {
                     this.level = HttpLoggingInterceptor.Level.BODY
                 })
             }
+
 
             val retrofit = Retrofit.Builder()
                 .baseUrl(baseUrl)

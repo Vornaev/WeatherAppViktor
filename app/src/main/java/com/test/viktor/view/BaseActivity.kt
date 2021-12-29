@@ -8,30 +8,30 @@ import kotlin.math.roundToInt
 
 abstract class BaseActivity : AppCompatActivity() {
 
-     fun View.animateResizeAndHide() {
+    fun View.animateResizeAndHide() {
         val animator = this.animate().alpha(0f).scaleX(0.7f).scaleY(0.7f)
         animator.duration = 200
         animator.start()
     }
 
-     fun View.animateResizeAndShow() {
+    fun View.animateResizeAndShow() {
         val animator =
             this.animate().alpha(1f).scaleX(1f).scaleY(1f)
         animator.duration = 500
         animator.start()
     }
 
-    fun View.animateFadeInSlow(){
-        val animator = this.animate().alpha(1f)
-        animator.duration = 1000
-        animator.start()
+    fun View.animateFadeInSlow() {
+            val animator = this.animate().alpha(1f)
+            animator.duration = 2500
+            animator.start()
     }
 
     protected fun Double.toText(): String {
         return this.roundToInt().toString()
     }
 
-    protected  fun handleError(networkError: String?) {
+    protected fun handleError(networkError: String?) {
         DialogUtills.createDialogConfirm(
             activity = this,
             title = "Error",

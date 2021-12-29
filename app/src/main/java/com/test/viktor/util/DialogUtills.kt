@@ -18,7 +18,7 @@ object DialogUtills {
             return
 
         createMessageDialog(
-                activity,
+               context  = activity,
                 title = title,
                 message = message,
                 buttonTitle = buttonTitle,

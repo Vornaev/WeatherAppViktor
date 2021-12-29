@@ -3,4 +3,5 @@
     <dimen name="view_margin_start">48dp</dimen>
     <dimen name="view_margin_top" >64dp</dimen>
     <dimen name="margin_extra_large">48dp</dimen>
+    <dimen name="margin_large">48</dimen>
 </resources>

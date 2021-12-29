@@ -7,50 +7,43 @@
     tools:context=".view.MainActivity">
 
     <ImageView
-        android:scaleType="centerCrop"
-        android:adjustViewBounds="true"
         android:id="@+id/weatherBackgroundImg"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:background="@android:color/transparent"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/background" />
 
-        <androidx.appcompat.widget.Toolbar
-            android:layout_marginTop="24dp"
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@android:color/transparent"
-            app:popupTheme="@style/Theme.HumanityInterviewAppViktor.PopupOverlay" >
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginTop="28dp"
+        android:background="@android:color/transparent"
+        app:popupTheme="@style/Theme.HumanityInterviewAppViktor.PopupOverlay"
+        app:title=" ">
 
-            <TextView
-                android:id="@+id/weatherActivityCityName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/skopje"
-                android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-        </androidx.appcompat.widget.Toolbar>
+        <TextView
+            android:id="@+id/weatherActivityCityName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/skopje"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </com.google.android.material.appbar.MaterialToolbar>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefresh"
-        android:layout_marginTop="?actionBarSize"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="?actionBarSize">
 
-    <include
-        android:id="@+id/contentMain"
-        layout="@layout/content_main" />
+        <include
+            android:id="@+id/contentMain"
+            layout="@layout/content_main" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        android:id="@+id/fab"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="bottom|end"-->
-<!--        android:layout_marginEnd="@dimen/fab_margin"-->
-<!--        android:layout_marginBottom="16dp"-->
-<!--        app:srcCompat="@android:drawable/ic_dialog_email"-->
-<!--        android:contentDescription="@string/add_location" />-->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

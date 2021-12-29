@@ -3,17 +3,18 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginStart="@dimen/view_margin_start"
-    android:layout_marginTop="@dimen/view_margin_start">
+    android:layout_marginTop="@dimen/view_margin_start"
+    android:paddingStart="@dimen/view_margin_start"
+    android:paddingEnd="@dimen/view_margin_start">
 
     <TextView
         android:id="@+id/weatherActivityWeatherInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/view_margin_top"
-        android:text="Clear Sky"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,7 +25,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_8dp"
-        android:text="27 C"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,6 +34,7 @@
     <!--    TEMP VALUES-->
     <TextView
         android:id="@+id/weatherActivityMinTemp"
+        style="@style/TextViewLabelTemperatureStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_24dp"
@@ -44,7 +45,18 @@
         app:layout_constraintTop_toBottomOf="@id/weatherActivityTemp" />
 
     <TextView
+        android:id="@+id/weatherActivityMinTempValue"
+        style="@style/TextViewValueTemperatureStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8dp"
+        app:layout_constraintEnd_toEndOf="@id/weatherActivityMinTemp"
+        app:layout_constraintStart_toStartOf="@id/weatherActivityMinTemp"
+        app:layout_constraintTop_toBottomOf="@id/weatherActivityMinTemp" />
+
+    <TextView
         android:id="@+id/weatherActivityRealFeel"
+        style="@style/TextViewLabelTemperatureStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/realfeel"
@@ -54,7 +66,18 @@
         app:layout_constraintTop_toTopOf="@id/weatherActivityMinTemp" />
 
     <TextView
+        android:id="@+id/weatherActivityRealFeelValue"
+        style="@style/TextViewValueTemperatureStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8dp"
+        app:layout_constraintEnd_toEndOf="@id/weatherActivityRealFeel"
+        app:layout_constraintStart_toStartOf="@id/weatherActivityRealFeel"
+        app:layout_constraintTop_toBottomOf="@id/weatherActivityRealFeel" />
+
+    <TextView
         android:id="@+id/weatherActivityMaxTemp"
+        style="@style/TextViewLabelTemperatureStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/max"
@@ -64,4 +87,85 @@
         app:layout_constraintTop_toTopOf="@id/weatherActivityMinTemp" />
 
 
+    <TextView
+        android:id="@+id/weatherActivityMaxTempValue"
+        style="@style/TextViewValueTemperatureStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8dp"
+        app:layout_constraintEnd_toEndOf="@id/weatherActivityMaxTemp"
+        app:layout_constraintStart_toStartOf="@id/weatherActivityMaxTemp"
+        app:layout_constraintTop_toBottomOf="@id/weatherActivityMaxTemp" />
+
+
+    <TextView
+        android:id="@+id/weatherSunsetLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="@dimen/margin_extra_large"
+        android:text="@string/sunset"
+        android:textAppearance="?android:textAppearanceSmall"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/weatherSunsetImage"
+        app:layout_constraintTop_toBottomOf="@id/weatherActivityMinTempValue" />
+
+    <TextView
+        android:id="@+id/weatherSunriseLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="@dimen/margin_extra_large"
+        android:text="@string/sunrise"
+        android:textAppearance="?android:textAppearanceSmall"
+        app:layout_constraintEnd_toEndOf="@id/weatherSunriseValue"
+        app:layout_constraintStart_toStartOf="@id/weatherSunriseImage"
+        app:layout_constraintTop_toBottomOf="@id/weatherActivityMinTempValue" />
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/weatherSunsetImage"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:contentDescription="@string/sunset"
+        android:src="@drawable/sunset2"
+        android:scaleType="centerCrop"
+        android:layout_marginEnd="@dimen/margin_8dp"
+        app:layout_constraintEnd_toStartOf="@id/weatherSunsetValue"
+        app:layout_constraintTop_toBottomOf="@id/weatherSunriseLabel" />
+
+    <TextView
+        android:id="@+id/weatherSunsetValue"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginStart="@dimen/margin_8dp"
+        android:layout_marginEnd="@dimen/margin_large"
+        android:textAppearance="?android:textAppearanceMedium"
+        app:layout_constraintBottom_toBottomOf="@id/weatherSunsetImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/weatherSunsetImage" />
+
+    <ImageView
+        android:id="@+id/weatherSunriseImage"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:contentDescription="@string/sunrise"
+        android:scaleType="centerCrop"
+        android:src="@drawable/sunrise_icon"
+        android:layout_marginStart="@dimen/margin_large"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/weatherSunriseLabel" />
+
+    <TextView
+        android:id="@+id/weatherSunriseValue"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginStart="@dimen/margin_8dp"
+        android:textAppearance="?android:textAppearanceMedium"
+        app:layout_constraintBottom_toBottomOf="@id/weatherSunriseImage"
+        app:layout_constraintStart_toEndOf="@id/weatherSunriseImage"
+        app:layout_constraintTop_toTopOf="@id/weatherSunriseImage" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+

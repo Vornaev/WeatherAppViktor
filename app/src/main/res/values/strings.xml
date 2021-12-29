@@ -16,4 +16,9 @@
     <string name="max">Max</string>
     <string name="realfeel">RealFeel</string>
     <string name="min">Min</string>
+    <string name="default_temp_val">0</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="sunset">Sunset</string>
+    <string name="background">Background</string>
+    <string name="units">Units format</string>
 </resources>

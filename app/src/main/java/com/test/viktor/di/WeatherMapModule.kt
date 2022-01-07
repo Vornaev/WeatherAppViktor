@@ -1,5 +1,6 @@
 package com.test.viktor.di
 
+import com.test.library.DateOptions
 import com.test.viktor.datasource.network.OpenWeatherHttpClient
 import com.test.viktor.datasource.repository.impl.WeatherMapRepository
 import com.test.viktor.datasource.repository.interfaces.IWeatherMapRemoteDataSource

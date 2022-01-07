@@ -13,3 +13,11 @@
 .externalNativeBuild
 .cxx
 local.properties
+*.class
+*.bin
+*.jar
+*.dex
+*.len
+*.tab
+*.txt
+*/build

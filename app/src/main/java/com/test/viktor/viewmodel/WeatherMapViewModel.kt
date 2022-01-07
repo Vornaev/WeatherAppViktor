@@ -1,6 +1,8 @@
 package com.test.viktor.viewmodel
 
 import androidx.lifecycle.*
+import com.test.base.MyClass
+import com.test.library.DateOptions
 import com.test.viktor.model.response.realtime.WeatherRealTimeResponse
 import com.test.viktor.datasource.network.helpers.ApiResult
 import com.test.viktor.datasource.repository.interfaces.IWeatherMapRemoteDataSource
@@ -19,9 +21,16 @@ import javax.inject.Inject
 @HiltViewModel
 class WeatherMapViewModel @Inject constructor(
     private val app: OpenWeatherApplication,
-    private val repository: IWeatherMapRemoteDataSource
+    private val repository: IWeatherMapRemoteDataSource,
+    private val dateOptions: DateOptions,
+    private val extrea : MyClass
+
 ) : AndroidViewModel(app) {
 
+
+    init {
+        val p =100
+    }
     var unitFormat = UnitFormat.METRIC
 
     val airPollutionDataFlow: MutableStateFlow<ApiResult<AirPollutionResponse>> =

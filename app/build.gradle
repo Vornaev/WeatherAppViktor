@@ -47,6 +47,8 @@ dependencies {
 
    //DI Framework
     implementation "com.google.dagger:hilt-android:2.38.1"
+    implementation project(path: ':library')
+    implementation project(path: ':base')
     kapt "com.google.dagger:hilt-android-compiler:2.38.1"
 
 
